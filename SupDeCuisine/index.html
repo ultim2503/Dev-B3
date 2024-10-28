@@ -3,17 +3,75 @@
 <html lang="fr"></html>
     <head>
         <meta charset="UTF-8">
-        <title>SupDeCuisine</title>
+        <title>Sup de Cuisine</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
 
     <body>
         <header>
-
+            <nav>
+                <div class = "Image-Div">
+                    <img src="img/Recette20.jpg">
+                </div>
+                <div class = "Title-Div">
+                    <h1>CHERCHEZ PARMIS PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET GENEREUSES</h1>
+                    <div class="Input-Container">
+                        <input id="SearchBar" type="text" placeholder="Rechercher une recette...">
+                        <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </div>
+                </div>
+            </nav>
         </header>
 
         <main>
+            <nav class="Selection">
+                <div class="select-container">
+                    <span class="placeholder">Ingredients</span>
+                    <i class="fa-solid fa-caret-down"></i>
+                    <select>
+                        <option value="pomme">Pomme</option>
+                        <option value="banane">Banane</option>
+                        <option value="orange">Orange</option>
+                        <option value="fraise">Fraise</option>
+                    </select>
+                </div>
+
+                <div class="select-container">
+                    <span class="placeholder">Appareils</span>
+                    <i class="fa-solid fa-caret-down"></i>
+                    <select>
+                        <option value="pomme">Option</option>
+                        <option value="banane">Option</option>
+                        <option value="orange">Option</option>
+                        <option value="fraise">Option</option>
+                    </select>
+                </div>
+
+                <div class="select-container">
+                    <span class="placeholder">Ustensiles</span>
+                    <i class="fa-solid fa-caret-down"></i>
+                    <select>
+                        <option value="pomme">Option</option>
+                        <option value="banane">Option</option>
+                        <option value="orange">Option</option>
+                        <option value="fraise">Option</option>
+                    </select>
+                </div>
+
+                <p>50 recettes</p>
+            </nav>
+
+            <nav class="Affichage-Items">
+                <div class="Item" id="Item-1">
+                    <p>Patate</p>
+                    <a><i class="fa-solid fa-xmark"></i></a>
+                </div>
+            </nav>
+
+            <nav class="Affichage-Recettes">
+                
+            </nav>
 
         </main>
 
