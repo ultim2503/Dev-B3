@@ -6,8 +6,8 @@
 
 
 html, body {
-    margin: 0;    
-    padding: 0;   
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;  
 }
 
@@ -149,7 +149,7 @@ body{
                 margin-right: 2%;
     
                 &:hover {
-                    transform: scale(1.05); 
+                    transform: scale(1.05);
                 }
     
                 
