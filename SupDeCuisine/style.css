@@ -8,13 +8,12 @@
 html, body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  
+    box-sizing: border-box;
 }
 
 body{
     header{
         position: relative;
-
 
         .Image-Div{
             img{
@@ -42,33 +41,34 @@ body{
             flex-direction: column;
 
             h1{
-                margin-top: 200px;
                 color: var(--color-yellow);
-                font-size: 5em;
+                font-size: 3em;
                 font-family:var(--Main-Police);
             }
 
             .Input-Container{
                 position: relative;
 
+                
                 input{
-                    font-size: 5em;
+                    font-size: 3em;
                     border-radius: 35px;
                     border: none;
                     outline: none;
                     padding: 40px 40px 40px 40px;
+                    width: 100%;
                 }
 
                 a{
                     position: absolute;
-                    top: 20%;
-                    left: 90%;
-                    background-color: #f5f5f5;
+                    top: 50%;
+                    left: 95%;
+                    transform: translateY(-50%); /* Assure l'alignement vertical parfait */
                 }
 
                 i{
                     color: #000000;
-                    font-size: 80px;
+                    font-size: 5vh;
                 }
             }
         }
@@ -182,7 +182,7 @@ body{
                 display: flex;
                 position: relative;
                 flex-direction: column;
-                background-color: rgb(222, 222, 222);
+                background-color: rgb(242, 242, 242);
                 justify-content: center;
                 align-items: center;
                 border-radius: 50px;
@@ -197,10 +197,8 @@ body{
                 img{
                     z-index: 1;
                     width: 100%;
-                    height: 100%;         
-                    max-width: 100vw;     
-                    max-height: 100vh;    
-                    object-fit: cover;  
+                    height: auto;
+                    object-fit: cover;
                 }
 
                 .ContentCard{
@@ -208,8 +206,41 @@ body{
                     flex-direction: column;
                     font-weight: bold;
                     font-family:var(--Main-Police);
-                    width: 90%;
-                    padding: 0% 5% 5% 5%;
+                    width: 100%;
+                    text-align: center;
+                    aspect-ratio: 1.5;
+
+                    h1 {
+                        font-size: 2.5vw;
+                    }
+
+                    h2 {
+                        color: #7f7f7f;
+                        display: flex;
+                        margin-left: 5%;
+                        font-size: 2vw;
+                    }
+
+                    h3{
+                        color: #3e3e3e;
+                        font-size: 1.5vw;
+                    }
+
+                    p {
+                        color: #3e3e3e;
+                        font-size: 1vw; /* Description adaptée */
+                    }
+
+
+                    .Ingredients-Item{
+                        display:flex;
+                        width: 25%;
+                        border-radius: 10%;
+                        text-align: center;
+                        flex-direction: column;
+                        margin: 0;
+                        background-color: aqua;
+                    }
                 }
             }
         }
