@@ -89,16 +89,15 @@ body{
             .select-container{
                 position: relative;
                 display: inline-flex;
-                padding: 40px;
+                padding: 1% 2% 1% 2%;
                 border: 2px solid #3e3e3e;
                 border-radius: 20px;
-                width: 15%;
                 cursor: pointer;
                 margin-right: 5%;
 
                 .placeholder {
                     color: #3e3e3e;
-                    font-size: 300%;
+                    font-size: 100%;
                     margin-right: auto;
                     font-weight: bold;
                     font-family: var(--Main-Police);
@@ -106,8 +105,8 @@ body{
 
                 i{
                     color: #3e3e3e;
-                    font-size: 300%;
-                    margin-left: auto;
+                    font-size: 100%;
+                    margin-left: 10%;
                 }
 
                 select{
@@ -123,10 +122,9 @@ body{
             }
 
             p{
-                font-size: 400%;
-                position: absolute;
-                right: 5%;
+                font-size: 100%;
                 font-family: var(--Main-Police);
+                color: #7f7f7f;
             }
         }
 
