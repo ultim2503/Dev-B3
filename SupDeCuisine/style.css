@@ -132,7 +132,7 @@ body{
         }
 
 
-        .Affichage-Items {
+        .Items-Container {
             margin-top: 5%;
             display: flex;
             flex-wrap: wrap;
@@ -175,27 +175,29 @@ body{
         }
 
 
-        .Affichage-Recettes {
+        .Recettes-Container {
             display: flex;
             margin-top: 5%;
             position: relative;
+            display: grid;
+            grid-template-columns: repeat(3 ,1fr);
+            gap: 30px;
         
             .Card {
                 display: flex;
                 position: relative;
                 flex-direction: column;
                 background-color: rgb(242, 242, 242);
-                background-color: rgb(242, 242, 242);
                 justify-content: center;
                 align-items: center;
                 border-radius: 10px;
                 overflow: hidden; /* Empêche les débordements */
-                width: 35%;
-                max-width: 35%; /* Limite la largeur maximale de la carte */
+                width: 100%;
                 box-sizing: border-box;
                 transition: transform 0.2s;
                 border: 1px solid #ccc;
                 margin-right: 5%;
+
                 &:hover {
                     transform: scale(1.015);
                 }
@@ -222,7 +224,7 @@ body{
 
         
                     h1 {
-                        font-size: 130%;
+                        font-size: 100%;
                         margin-bottom: 1.5rem;
                         text-align: center;
                         word-wrap: break-word; /* Coupe les mots trop longs */
@@ -230,7 +232,7 @@ body{
         
                     h2 {
                         color: #7f7f7f;
-                        font-size: 100%; 
+                        font-size: 80%; 
                         margin-bottom: 0.8rem;
                         text-transform: uppercase;
                         font-weight: bold;
@@ -246,13 +248,12 @@ body{
                     .Ingredients-List {
                         display: grid;
                         grid-template-columns: repeat(2, 1fr);
-                        gap: 0.8rem; /* Ajuste l'espacement entre les colonnes */
+                        gap: 10px; /* Ajuste l'espacement entre les colonnes */
         
                         .Ingredients-Item {
                             display: flex;
                             justify-content: space-between;
                             font-size: 50%; /* Augmente la taille des ingrédients */
-                            padding: 0.5rem 0;
                             border-bottom: 1px solid #e0e0e0;
         
                             h3 {
