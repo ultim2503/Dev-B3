@@ -30,7 +30,7 @@
                 <div class="select-container">
                     <span class="placeholder">Ingredients</span>
                     <i class="fa-solid fa-caret-down"></i>
-                    <select>
+                    <select class="ingredients-select-container">
                         <option value="pomme">Pomme</option>
                         <option value="banane">Banane</option>
                         <option value="orange">Orange</option>
@@ -41,7 +41,7 @@
                 <div class="select-container">
                     <span class="placeholder">Appareils</span>
                     <i class="fa-solid fa-caret-down"></i>
-                    <select>
+                    <select class="appareils-select-container">
                         <option value="pomme">Option</option>
                         <option value="banane">Option</option>
                         <option value="orange">Option</option>
@@ -52,7 +52,7 @@
                 <div class="select-container">
                     <span class="placeholder">Ustensiles</span>
                     <i class="fa-solid fa-caret-down"></i>
-                    <select>
+                    <select class="ustensiles-select-container">
                         <option value="pomme">Option</option>
                         <option value="banane">Option</option>
                         <option value="orange">Option</option>
@@ -60,7 +60,7 @@
                     </select>
                 </div>
         
-                <p>50 recettes</p>
+                <p class="Number-Recettes">0 recettes</p>
             </nav>
 
             <nav class="Items-Container">
@@ -71,39 +71,43 @@
             </nav>
 
             <div class="Recettes-Container">
-                <div class="Card" id="Card-1">
-                    <img src="img/Recette20.jpg" alt="Recette image">
-                    <div class="ContentCard">
-                        <h1>Poulet coco réunionnais</h1>
-                        <h2>Recette</h2>
-                        <p>Voici une brève description de la recette...</p>
-                        <h2>Ingrédients</h2>
-                        <div class="Ingredients-List">
-                            <div class="Ingredients-Item">
-                                <h3>Poulet</h3>
-                                <p>1</p>
+                <div class="card">
+                    <div class="card-top">
+                        <img class="card-img" src="img/Recette20.jpg" alt="Recette image">
+                    </div>
+                    <div class="card-content">
+                        <div class="ContentCard">
+                            <h1>Poulet coco réunionnais</h1>
+                            <h2>Recette</h2>
+                            <p>Voici une brève description de la recette...</p>
+                            <h2>Ingrédients</h2>
+                            <div class="Ingredients-List">
+                                <div class="Ingredients-Item">
+                                    <h3>Poulet</h3>
+                                    <p>1</p>
+                                </div>
+                                <div class="Ingredients-Item">
+                                    <h3>Lait de coco</h3>
+                                    <p>400 ml</p>
+                                </div>
+                                <div class="Ingredients-Item">
+                                    <h3>Coulis de tomate</h3>
+                                    <p>25 cl</p>
+                                </div>
+                                <div class="Ingredients-Item">
+                                    <h3>Oignon</h3>
+                                    <p>1</p>
+                                </div>
+                                <div class="Ingredients-Item">
+                                    <h3>Poivron rouge</h3>
+                                    <p>1</p>
+                                </div>
+                                <div class="Ingredients-Item">
+                                    <h3>Huile d'olive</h3>
+                                    <p>1 cuillère à soupe</p>
+                                </div>
                             </div>
-                            <div class="Ingredients-Item">
-                                <h3>Lait de coco</h3>
-                                <p>400 ml</p>
-                            </div>
-                            <div class="Ingredients-Item">
-                                <h3>Coulis de tomate</h3>
-                                <p>25 cl</p>
-                            </div>
-                            <div class="Ingredients-Item">
-                                <h3>Oignon</h3>
-                                <p>1</p>
-                            </div>
-                            <div class="Ingredients-Item">
-                                <h3>Poivron rouge</h3>
-                                <p>1</p>
-                            </div>
-                            <div class="Ingredients-Item">
-                                <h3>Huile d'olive</h3>
-                                <p>1 cuillère à soupe</p>
-                            </div>
-                        </div>
+                        </div>    
                     </div>
                 </div>
             </div>
