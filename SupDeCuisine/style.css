@@ -181,6 +181,10 @@ body{
             display: grid;
             grid-template-columns: repeat(3 ,1fr);
             gap: 30px;
+
+            @media screen and (max-width: 800px){
+                grid-template-columns: repeat(2 ,1fr);
+            }
         
             .card {
                 display: flex;
@@ -189,12 +193,12 @@ body{
                 background-color: rgb(242, 242, 242);
                 border-radius: 10px;
                 overflow: hidden;
-                 /* Empêche les débordements */
                 width: 100%;
                 box-sizing: border-box;
                 transition: transform 0.2s;
                 border: 1px solid #ccc;
                 margin-right: 5%;
+                box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
 
                 &:hover {
                     transform: scale(1.015);

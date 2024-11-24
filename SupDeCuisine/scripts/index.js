@@ -3,6 +3,7 @@ let filtres_appareils = [];
 let filtres_ustensils = [];
 let recettes = [];
 let Count_Recette = 0;
+let selectedItems = [];
 
 
 async function loadRecettes() {
@@ -103,15 +104,81 @@ function UpdateRecettes(){
 
 function UpdateFiltres(){
     const ingredientcontainer = document.querySelector('.ingredients-select-container');
-    const appareilscontainer = document.querySelector('appareils-select-container');
-    const ustensilescontainer = document.querySelector('ustensiles-select-container');
+    const appareilscontainer = document.querySelector('.appareils-select-container');
+    const ustensilescontainer = document.querySelector('.ustensiles-select-container');
 
-    filtres_ingredients.forEach(ingredients =>{
-        const ingredienthtml = `<option value="${ingredients}">${ingredients}</option>`;
+    filtres_ingredients.forEach(ingredient =>{
+        const ingredienthtml = `<option value="${ingredient}">${ingredient}</option>`;
 
         ingredientcontainer.innerHTML += ingredienthtml;
     });
-}   
+    
+    filtres_appareils.forEach(appareil =>{
+        const appareilshtml = `<option value="${appareil}">${appareil}</option>`;
+
+        appareilscontainer.innerHTML += appareilshtml;
+    });
+
+    filtres_ustensils.forEach(ustensil =>{
+        const ustensilshtml = `<option value="${ustensil}">${ustensil}</option>`;
+
+        ustensilescontainer.innerHTML += ustensilshtml;
+    });
+}
+
+
+document.querySelector('.ingredients-select-container').addEventListener('change', handleSelectionChange);
+document.querySelector('.appareils-select-container').addEventListener('change', handleSelectionChange);
+document.querySelector('.ustensiles-select-container').addEventListener('change', handleSelectionChange);
+
+function handleSelectionChange(event) {
+    const selectedValue = event.target.value;
+
+    if (selectedItems.includes(selectedValue)) {
+        console.log(`${selectedValue} est déjà ajouté.`);
+        return;
+    }
+
+
+    console.log(`Vous avez sélectionné : ${selectedValue}`);
+
+    const ItemContainer = document.querySelector('.Items-Container');
+
+    const FilterItem = document.createElement('div');
+    FilterItem.setAttribute('value', selectedValue);
+    FilterItem.classList.add('Item');
+
+
+    FilterItem.innerHTML = `
+        <p>${selectedValue}</p>
+        <a class="remove-item"><i class="fa-solid fa-xmark"></i></a>
+    `;
+
+    
+    ItemContainer.appendChild(FilterItem);
+
+    selectedItems.push(selectedValue);
+
+    UpdateRecettes();
+
+    console.log(selectedItems);
+
+    
+    FilterItem.querySelector('.remove-item').addEventListener('click', () => {
+        FilterItem.remove();
+        console.log(`${selectedValue} a été retiré.`);
+
+        selectedItems = selectedItems.filter(item => item !== selectedValue);
+        console.log(selectedItems);
+        UpdateRecettes();
+    });
+
+
+    if (event.target.classList.contains('ingredients-select-container')) {
+    } else if (event.target.classList.contains('appareils-select-container')) {
+    } else if (event.target.classList.contains('ustensiles-select-container')) {
+    }
+}
 
 
 loadRecettes();
