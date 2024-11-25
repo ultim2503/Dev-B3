@@ -84,6 +84,13 @@ function UpdateRecettes() {
     });
 
     Number_Recettes.textContent = `${filteredRecettes.length} Résultat(s)`;
+
+    const NoResultContainer = document.querySelector(`.NoResult-Container`);
+
+    if (filteredRecettes.length == 0) {
+        NoResultContainer.innerHTML += `<img src="img/NoResult.png">`
+    };
+
 }
 
 
