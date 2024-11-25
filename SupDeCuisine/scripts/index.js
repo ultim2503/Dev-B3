@@ -4,6 +4,7 @@ let filtres_ustensils = [];
 let recettes = [];
 let Count_Recette = 0;
 let selectedItems = [];
+let searchbar = document.querySelector('.SearchBar');
 
 
 async function loadRecettes() {
@@ -52,39 +53,43 @@ async function loadRecettes() {
 }
 
 
-
-
-function UpdateRecettes(){
-    const container = document.querySelector('.Recettes-Container');
-    const Number_Recettes = document.querySelector('.Number-Recettes')
-    container.innerHTML = '';
-    Count_Recette = 0;
-
-    const filteredRecettes = recettes.filter(recette => {
-        const hasSelectedIngredients = selectedItems.every(item => 
-            recette.ingredients.some(ingredient => 
-                ingredient.ingredient.toLowerCase().includes(item.toLowerCase())
-            )
+function matchesSelectedItems(recette, selectedItems) {
+    return selectedItems.every(item => {
+        const lowerItem = item.toLowerCase();
+        const ingredientMatch = recette.ingredients.some(ingredient =>
+            ingredient.ingredient.toLowerCase().includes(lowerItem)
         );
-
-        const hasSelectedAppareils = selectedItems.every(item => 
-            recette.appliance && recette.appliance.toLowerCase().includes(item.toLowerCase())
+        const applianceMatch = recette.appliance?.toLowerCase().includes(lowerItem);
+        const ustensilMatch = recette.ustensils.some(ustensil =>
+            ustensil.toLowerCase().includes(lowerItem)
         );
-
-        const hasSelectedUstensils = selectedItems.every(item =>
-            recette.ustensils.some(ustensil => 
-                ustensil.toLowerCase().includes(item.toLowerCase())
-            )
-        );
-
-        return hasSelectedIngredients || hasSelectedAppareils || hasSelectedUstensils;
+        return ingredientMatch || applianceMatch || ustensilMatch;
     });
+}
+
+
+
+
+function UpdateRecettes() {
+    const container = document.querySelector('.Recettes-Container');
+    const Number_Recettes = document.querySelector('.Number-Recettes');
+    container.innerHTML = '';
+
+    const filteredRecettes = recettes.filter(recette =>
+        matchesSelectedItems(recette, selectedItems)
+    );
 
     filteredRecettes.forEach(recette => {
-        Count_Recette += 1;
+        container.innerHTML += generateRecetteHTML(recette);
+    });
 
-        
-        const recetteHTML = `
+    Number_Recettes.textContent = `${filteredRecettes.length} Résultat(s)`;
+}
+
+
+
+function generateRecetteHTML(recette) {
+    return `
         <div class="card" id="Card-${recette.id}">
             <div class="card-top">
                 <img class="card-img" src="img/${recette.image}" alt="${recette.name}">
@@ -96,31 +101,32 @@ function UpdateRecettes(){
                     <p>${recette.description}</p>
                     <h2>Ingrédients</h2>
                     <div class="Ingredients-List">
-                        ${recette.ingredients.map(ingredient => `
+                        ${recette.ingredients
+                            .map(
+                                ingredient => `
                             <div class="Ingredients-Item">
                                 <h3>${ingredient.ingredient}</h3>
                                 <p>${ingredient.quantity || ''} ${ingredient.unit || ''}</p>
-                            </div>
-                        `).join('')}
+                            </div>`
+                            )
+                            .join('')}
                     </div>
                     <h2>Appareil</h2>
                     <p>${recette.appliance}</p>
                     <h2>Ustensiles</h2>
                     <ul>
-                        ${recette.ustensils.map(ustensil => `<li>${ustensil}</li>`).join('')}
+                        ${recette.ustensils
+                            .map(ustensil => `<li>${ustensil}</li>`)
+                            .join('')}
                     </ul>
                 </div>
             </div>
         </div>
     `;
-
-        
-        container.innerHTML += recetteHTML;
-    });
-
-    Number_Recettes.innerHTML = Count_Recette + ' Résultats';
-
 }
+
+
+
 
 function UpdateFiltres(){
     const ingredientcontainer = document.querySelector('.ingredients-select-container');
@@ -147,58 +153,54 @@ function UpdateFiltres(){
 }
 
 
-document.querySelector('.ingredients-select-container').addEventListener('change', handleSelectionChange);
-document.querySelector('.appareils-select-container').addEventListener('change', handleSelectionChange);
-document.querySelector('.ustensiles-select-container').addEventListener('change', handleSelectionChange);
+['ingredients', 'appareils', 'ustensiles'].forEach(type => {
+    document.querySelector(`.${type}-select-container`).addEventListener('change', event => {
+        addFilterTag(event.target.value);
+    });
+});
 
-function handleSelectionChange(event) {
-    const selectedValue = event.target.value;
+function addFilterTag(value) {
+    if (selectedItems.includes(value)) return;
 
-    if (selectedItems.includes(selectedValue)) {
-        console.log(`${selectedValue} est déjà ajouté.`);
-        return;
-    }
-
-
-    console.log(`Vous avez sélectionné : ${selectedValue}`);
-
-    const ItemContainer = document.querySelector('.Items-Container');
-
-    const FilterItem = document.createElement('div');
-    FilterItem.setAttribute('value', selectedValue);
-    FilterItem.classList.add('Item');
-
-
-    FilterItem.innerHTML = `
-        <p>${selectedValue}</p>
+    const tagContainer = document.querySelector('.Items-Container');
+    const tag = document.createElement('div');
+    tag.classList.add('Item');
+    tag.innerHTML = `
+        <p>${value}</p>
         <a class="remove-item"><i class="fa-solid fa-xmark"></i></a>
     `;
-
-    
-    ItemContainer.appendChild(FilterItem);
-
-    selectedItems.push(selectedValue);
-
-    UpdateRecettes();
-
-    console.log(selectedItems);
-
-    
-    FilterItem.querySelector('.remove-item').addEventListener('click', () => {
-        FilterItem.remove();
-        console.log(`${selectedValue} a été retiré.`);
-
-        selectedItems = selectedItems.filter(item => item !== selectedValue);
-        console.log(selectedItems);
-        UpdateRecettes();
+    tag.querySelector('.remove-item').addEventListener('click', () => {
+        removeFilterTag(value);
+        tag.remove();
     });
 
-
-    if (event.target.classList.contains('ingredients-select-container')) {
-    } else if (event.target.classList.contains('appareils-select-container')) {
-    } else if (event.target.classList.contains('ustensiles-select-container')) {
-    }
+    tagContainer.appendChild(tag);
+    selectedItems.push(value);
+    UpdateRecettes();
 }
 
+function removeFilterTag(value) {
+    selectedItems = selectedItems.filter(item => item !== value);
+    UpdateRecettes();
+}
+
+
+searchbar.addEventListener('input', event => {
+    const query = event.target.value.toLowerCase().trim();
+
+    const filteredRecettes = recettes.filter(recette => {
+        const nameMatch = recette.name.toLowerCase().includes(query);
+        const matchesFilters = matchesSelectedItems(recette, selectedItems);
+        return nameMatch && matchesFilters;
+    });
+
+    const container = document.querySelector('.Recettes-Container');
+    container.innerHTML = '';
+    filteredRecettes.forEach(recette => {
+        container.innerHTML += generateRecetteHTML(recette);
+    });
+
+    document.querySelector('.Number-Recettes').textContent = `${filteredRecettes.length} Résultat(s)`;
+});
 
 loadRecettes();
