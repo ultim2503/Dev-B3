@@ -8,7 +8,7 @@ let selectedItems = [];
 
 async function loadRecettes() {
     try {
-        const response = await fetch('scripts/Recettes.json'); // Charge le fichier JSON
+        const response = await fetch('scripts/Recettes.json');
         if (!response.ok) {
             throw new Error(`Erreur HTTP ! Statut : ${response.status}`);
         }
@@ -20,23 +20,22 @@ async function loadRecettes() {
         const ustensilsSet = new Set();
 
         recettes.forEach(recette => {
-            // Ajouter chaque ingrédient au Set
+            
             recette.ingredients.forEach(ingredient => {
                 ingredientsSet.add(ingredient.ingredient.toLowerCase());
             });
 
-            // Ajouter l'appareil au Set
+            
             if (recette.appliance) {
                 appareilsSet.add(recette.appliance.toLowerCase());
             }
 
-            // Ajouter chaque ustensile au Set
+            
             recette.ustensils.forEach(ustensil => {
                 ustensilsSet.add(ustensil.toLowerCase());
             });
         });
 
-        // Convertir les Sets en tableaux
         filtres_ingredients = Array.from(ingredientsSet);
         filtres_appareils = Array.from(appareilsSet);
         filtres_ustensils = Array.from(ustensilsSet);
@@ -61,9 +60,30 @@ function UpdateRecettes(){
     container.innerHTML = '';
     Count_Recette = 0;
 
-    recettes.forEach(recette => {
+    const filteredRecettes = recettes.filter(recette => {
+        const hasSelectedIngredients = selectedItems.every(item => 
+            recette.ingredients.some(ingredient => 
+                ingredient.ingredient.toLowerCase().includes(item.toLowerCase())
+            )
+        );
+
+        const hasSelectedAppareils = selectedItems.every(item => 
+            recette.appliance && recette.appliance.toLowerCase().includes(item.toLowerCase())
+        );
+
+        const hasSelectedUstensils = selectedItems.every(item =>
+            recette.ustensils.some(ustensil => 
+                ustensil.toLowerCase().includes(item.toLowerCase())
+            )
+        );
+
+        return hasSelectedIngredients || hasSelectedAppareils || hasSelectedUstensils;
+    });
+
+    filteredRecettes.forEach(recette => {
         Count_Recette += 1;
-        // Construire le HTML pour chaque recette
+
+        
         const recetteHTML = `
         <div class="card" id="Card-${recette.id}">
             <div class="card-top">
@@ -94,11 +114,11 @@ function UpdateRecettes(){
         </div>
     `;
 
-        // Ajouter le HTML généré au conteneur
+        
         container.innerHTML += recetteHTML;
-        Number_Recettes.innerHTML = Count_Recette + ' recettes';
-
     });
+
+    Number_Recettes.innerHTML = Count_Recette + ' Résultats';
 
 }
 
