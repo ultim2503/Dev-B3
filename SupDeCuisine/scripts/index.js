@@ -88,7 +88,7 @@ function UpdateRecettes() {
     const NoResultContainer = document.querySelector(`.NoResult-Container`);
 
     if (filteredRecettes.length == 0) {
-        NoResultContainer.innerHTML += `<img src="img/NoResult.png">`
+        //NoResultContainer.innerHTML += `<img src="img/NoResult.png">`
     };
 
 }

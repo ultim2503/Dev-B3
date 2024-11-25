@@ -311,6 +311,10 @@ body{
             img{
                 margin-top: 1rem;
                 width: 10rem;
+
+                @media screen and (max-width: 800px){
+                    width: 5rem;
+                }
             }
         }
         
