@@ -141,6 +141,89 @@ body{
             }
         }
 
+        .Options-Container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            font-family: var(--Main-Police);
+            padding: 1%;
+            
+        
+            .option-container {
+                background-color: #e3e3e3;
+                margin: 0 5% 0 0;
+                padding: 2%;
+                border-radius: 5px;
+                width: 95px; 
+                overflow: hidden;
+                display: none;
+                box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+
+                @media screen and (max-width: 800px){
+                    padding: 4%;
+                }
+
+                input{
+                    width: 90%;
+                    border-radius: 5px;
+                    margin-bottom: 15px;
+                    font-family: var(--Main-Police);
+                }
+
+                .content{
+                    padding: 4%;
+
+                    .dropdown-search {
+                        border-radius: 5px;
+                        width: 100%;
+                        padding: 8px;
+                        margin-bottom: 10px;
+                        box-sizing: border-box;
+                    }
+            
+                    p {
+                        transition: transform 0.2s;
+                        font-size: 15px;
+                        padding: 5%;
+                        margin: 0;
+            
+                        &:hover {
+                            background-color: #7f7f7f;
+                            color: aliceblue;
+                            border-radius: 5px;
+                            transform: scale(1.05);
+                        }
+                    }
+            
+                   
+                    & {
+                        max-height: 150px; 
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                        border-radius: 5px;
+                    }
+            
+                   
+                    &::-webkit-scrollbar {
+                        width: 5px;
+                    }
+            
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #7f7f7f;
+                        border-radius: 10px;
+                    }
+            
+                    &::-webkit-scrollbar-track {
+                        background: #e3e3e3;
+                    }
+                }
+            }
+
+            .visible {
+                display: block;
+            }
+        }
+
 
         .Items-Container {
             margin-top: 5%;
@@ -311,10 +394,6 @@ body{
             img{
                 margin-top: 1rem;
                 width: 10rem;
-
-                @media screen and (max-width: 800px){
-                    width: 5rem;
-                }
             }
         }
         
