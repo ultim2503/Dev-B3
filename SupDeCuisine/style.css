@@ -84,6 +84,11 @@ body{
             display: flex;
             flex-direction: row;
             align-items: center;
+
+            @media screen and (max-width: 600px){
+                font-size: 100%;
+                display:block;
+            }
             
 
             .select-container{
