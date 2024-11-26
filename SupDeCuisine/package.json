@@ -1,9 +1,14 @@
 {
-  "devDependencies": {
-    "jest": "^29.7.0"
-  },
-
+  "name": "supdecuisine",
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "test": "jest"
-}
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.0.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
 }

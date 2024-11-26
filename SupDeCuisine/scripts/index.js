@@ -302,22 +302,25 @@ function removeFilterTag(value) {
 }
 
 
-searchbar.addEventListener('input', event => {
-    const query = event.target.value.toLowerCase().trim();
-
-    const filteredRecettes = recettes.filter(recette => {
-        const nameMatch = recette.name.toLowerCase().includes(query);
-        const matchesFilters = matchesSelectedItems(recette, selectedItems);
-        return nameMatch && matchesFilters;
+if (searchbar) {
+    
+    searchbar.addEventListener('input', event => {
+        const query = event.target.value.toLowerCase().trim();
+    
+        const filteredRecettes = recettes.filter(recette => {
+            const nameMatch = recette.name.toLowerCase().includes(query);
+            const matchesFilters = matchesSelectedItems(recette, selectedItems);
+            return nameMatch && matchesFilters;
+        });
+    
+        const container = document.querySelector('.Recettes-Container');
+        container.innerHTML = '';
+        filteredRecettes.forEach(recette => {
+            container.innerHTML += generateRecetteHTML(recette);
+        });
+    
+        document.querySelector('.Number-Recettes').textContent = `${filteredRecettes.length} Résultat(s)`;
     });
-
-    const container = document.querySelector('.Recettes-Container');
-    container.innerHTML = '';
-    filteredRecettes.forEach(recette => {
-        container.innerHTML += generateRecetteHTML(recette);
-    });
-
-    document.querySelector('.Number-Recettes').textContent = `${filteredRecettes.length} Résultat(s)`;
-});
+}
 
 loadRecettes();
