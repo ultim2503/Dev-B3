@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectContainers = document.querySelectorAll('.select-container');
     const optionContainers = document.querySelectorAll('.option-container');
 
-    let areOptionsVisible = false; // État pour vérifier si les options sont visibles
+    let areOptionsVisible = false;
 
     selectContainers.forEach(selectContainer => {
         selectContainer.addEventListener('click', () => {
@@ -104,14 +104,56 @@ function UpdateRecettes() {
 
     Number_Recettes.textContent = `${filteredRecettes.length} Résultat(s)`;
 
+    
+    UpdateVisibleFiltres(filteredRecettes);
+
     const NoResultContainer = document.querySelector(`.NoResult-Container`);
-
     if (filteredRecettes.length == 0) {
-        //NoResultContainer.innerHTML += `<img src="img/NoResult.png">`
-    };
-
+        // NoResultContainer.innerHTML += `<img src="img/NoResult.png">`
+    }
 }
 
+
+
+function UpdateVisibleFiltres(filteredRecettes) {
+    
+    const ingredientcontainer = document.getElementById('ingredients-Content');
+    const appareilscontainer = document.getElementById('appareils-Content');
+    const ustensilescontainer = document.getElementById('ustensiles-Content');
+
+   
+    const visibleIngredients = new Set();
+    const visibleAppareils = new Set();
+    const visibleUstensils = new Set();
+
+    
+    filteredRecettes.forEach(recette => {
+        recette.ingredients.forEach(ingredient =>
+            visibleIngredients.add(ingredient.ingredient.toLowerCase())
+        );
+        if (recette.appliance) {
+            visibleAppareils.add(recette.appliance.toLowerCase());
+        }
+        recette.ustensils.forEach(ustensil =>
+            visibleUstensils.add(ustensil.toLowerCase())
+        );
+    });
+
+    
+    updateFilterContent(ingredientcontainer, filtres_ingredients, visibleIngredients);
+    updateFilterContent(appareilscontainer, filtres_appareils, visibleAppareils);
+    updateFilterContent(ustensilescontainer, filtres_ustensils, visibleUstensils);
+}
+
+
+function updateFilterContent(container, allFilters, visibleFilters) {
+    container.innerHTML = '';
+    allFilters.forEach(filter => {
+        if (visibleFilters.has(filter)) {
+            container.innerHTML += `<p value="${filter}">${filter}</p>`;
+        }
+    });
+}
 
 
 function generateRecetteHTML(recette) {
@@ -205,9 +247,9 @@ function addSearchFilter(type) {
         items.forEach(item => {
             const itemText = item.innerText.toLowerCase();
             if (itemText.includes(searchTerm)) {
-                item.style.display = 'block'; // Afficher l'élément
+                item.style.display = 'block'; 
             } else {
-                item.style.display = 'none'; // Masquer l'élément
+                item.style.display = 'none'; 
             }
         });
     });
@@ -216,17 +258,16 @@ function addSearchFilter(type) {
 
 document.addEventListener('DOMContentLoaded', () => {
     ['ingredients', 'appareils', 'ustensiles'].forEach(type => {
-        // Récupérer l'élément parent (par exemple: ingredients-Content)
+        
         const contentElement = document.getElementById(`${type}-Content`);
 
-        // S'assurer que l'élément existe avant d'ajouter un gestionnaire d'événement
+        
         if (contentElement) {
-            // Ajouter un événement 'click' au parent, mais gérer les clics sur les éléments <p>
+            
             contentElement.addEventListener('click', event => {
-                // Vérifier si l'élément cliqué est un <p>
                 if (event.target.tagName.toLowerCase() === 'p') {
                     console.log("Clique sur :", event.target.innerText);
-                    addFilterTag(event.target.innerText); // Ajouter à la fonction de filtrage
+                    addFilterTag(event.target.innerText); 
                 }
             });
         } else {
