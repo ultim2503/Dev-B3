@@ -5,7 +5,7 @@ on:
     branches: ["SupDeCuisine"]
     
 jobs:
-  test-app:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node
@@ -16,3 +16,19 @@ jobs:
         uses: actions/checkout@v4
       - name: Install dependencies
         run: NODE_ENV=development npm install
+      - name: Launch tests
+        run: NODE_ENV=development npm run test
+  build-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: NODE_ENV=development npm install
+      - name: Build app
+        run: NODE_ENV=development npm run build
+      
