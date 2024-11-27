@@ -32,9 +32,9 @@ jobs:
       - name: Get path
         run : pwd
       - name: Install dependencies
-        run: cd ../SupDeCuisine && NODE_ENV=development npm install
+        run: cd SupDeCuisine && NODE_ENV=development npm install
       - name: Launch tests
-        run: cd ../SupDeCuisine && NODE_ENV=development npm run test
+        run: cd SupDeCuisine && NODE_ENV=development npm run test
 
   build:
     runs-on: ubuntu-latest
@@ -47,9 +47,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
-        run: cd ../SupDeCuisine && NODE_ENV=development npm install
+        run: cd SupDeCuisine && NODE_ENV=development npm install
       - name: Build app
-        run: cd ../SupDeCuisine && NODE_ENV=development npm run build
+        run: cd SupDeCuisine && NODE_ENV=development npm run build
       - name: Setup Github Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
