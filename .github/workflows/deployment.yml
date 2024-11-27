@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Up to good branch
-        run : NODE_ENV=development cd ../SupDeCuisine
+        run : NODE_ENV=development cd ./SupDeCuisine
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
