@@ -21,21 +21,22 @@ concurrency:
 jobs:
 
   test:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: "22"
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Install dependencies
-      run: cd SupDeCuisine && npm install
-    - name: Fix permissions for Jest
-      run: cd SupDeCuisine && chmod +x ./node_modules/.bin/jest
-    - name: Run tests
-      run: cd SupDeCuisine && npm test
-
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Get path
+        run : pwd
+      - name: Install dependencies
+        run: cd SupDeCuisine && NODE_ENV=development npm install
+      - name: Fix permissions for Jest
+        run: cd SupDeCuisine && chmod +x ./node_modules/.bin/jest
+      - name: Launch tests
+        run: cd SupDeCuisine && NODE_ENV=development npm run test
 
   build:
     runs-on: ubuntu-latest
