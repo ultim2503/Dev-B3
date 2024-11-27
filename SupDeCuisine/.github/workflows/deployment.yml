@@ -18,7 +18,7 @@ jobs:
         run: NODE_ENV=development npm install
       - name: Launch tests
         run: NODE_ENV=development npm run test
-  build-app:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node
