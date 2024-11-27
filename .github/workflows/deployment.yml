@@ -29,12 +29,10 @@ jobs:
           node-version: "22"
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Up to good branch
-        run : cd SupDeCuisine
       - name: Get path
         run : pwd
       - name: Install dependencies
-        run: NODE_ENV=development npm install
+        run: cd SupDeCuisine && NODE_ENV=development npm install
       - name: Launch tests
         run: NODE_ENV=development npm run test
 
