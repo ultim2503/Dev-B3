@@ -23,6 +23,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Up to good branch
+        run : NODE_ENV=development cd SupDeCuisine
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -30,6 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
+
         run: NODE_ENV=development npm install
       - name: Launch tests
         run: NODE_ENV=development npm run test
