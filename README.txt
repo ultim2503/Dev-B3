@@ -4,6 +4,8 @@ Fourquet Raphaël ))
 
 Url du site (publiée en "Deploy from a branch" et non GitHubActions) : https://ultim2503.github.io/Dev-B3/SupDeCuisine/
 
+!!IMPORTANT!! pour faire les test unitaire: GitHub\Dev-B3\SupDeCuisine (Bien être dans le dossier SupDeCuisine avant de npm test)
+
 
 - J'ai rencontrer plusieurs difficultées durant la création de Sup De Cuisine nottament sur le déploiement GitHub avec GitHubActions 
 ou j'ai pu quand même fix la plupart des beugs liés aux package.json ainsi que mon deployment.yml.
